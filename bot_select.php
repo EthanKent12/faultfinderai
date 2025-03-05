@@ -11,23 +11,23 @@
         });
 
         function fetchBots() {
-            fetch('fetch_bots.php')
-                .then(response => response.json())
-                .then(data => {
-                    let botContainer = document.getElementById("bot-list");
-                    botContainer.innerHTML = ""; // Clear any existing content
+            fetch("https://67c7b741c19eb8753e7a78fd.mockapi.io/api/v1/bots")
+            .then(response => response.json())
+            .then(data => {
+                let botList = document.getElementById("bot-list");
+                botList.innerHTML = "";
 
-                    data.forEach(bot => {
-                        let botCard = document.createElement("div");
-                        botCard.className = "bot-card";
-                        botCard.innerHTML = `
-                            <h3>${bot.Name}</h3>
-                            <button onclick="selectBot(${bot.ProductID})">View Logs</button>
-                        `;
-                        botContainer.appendChild(botCard);
-                    });
-                })
-                .catch(error => console.error('Error fetching bots:', error));
+                data.forEach(bot => {
+                    let botCard = document.createElement("div");
+                    botCard.classList.add("bot-card");
+                    botCard.textContent = `${bot.bot_name} - ${bot.status}`;
+                    botCard.onclick = function() {
+                        selectBot(bot.id);
+                    };
+                    botList.appendChild(botCard);
+                });
+            })
+            .catch(error => console.error("Error fetching bots:", error));
         }
 
         function selectBot(botId) {
@@ -36,11 +36,22 @@
     </script>
 </head>
 <body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <h2>Stratus ADV</h2>
+    <a href="#">DASHBOARD</a>
+    <a href="#">BOTS</a>
+    <a href="#">LOGOUT</a>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
     <div class="container">
-        <h1>Select a Bot</h1>
-        <div id="bot-list">
-            <p>Loading bots...</p>
-        </div>
+        <h2>Select a Bot</h2>
+        <div id="bot-list" class="bot-grid"></div>
     </div>
+</div>
+
 </body>
 </html>
