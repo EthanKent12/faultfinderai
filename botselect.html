@@ -1,1 +1,143 @@
-<h1>Welcome to bot select page</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelligence Library Tester Dashboard</title>
+    <link rel="stylesheet" href="botselect.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js for pie charts -->
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <img src="stratusLogo.png" alt="Stratus Logo" class="sidebar-logo">
+        <ul class="sidebar-menu">
+            <li><a href="#"><i>🏠</i> DASHBOARD</a></li>
+            <li><a href="#"><i>🤖</i> BOTS ▾</a></li>
+            <ul class="sidebar-submenu">
+                <li><a href="#">Pirate Bot</a></li>
+                <li><a href="#">Tim Bot</a></li>
+                <li><a href="#">Phillip Bot</a></li>
+                <li><a href="#">BluePeak IT AI</a></li>
+                <li><a href="#">AI Assistant</a></li>
+                <li><a href="#">Nate Bot</a></li>
+            </ul>
+            <li><a href="#"><i>🚪</i> LOGOUT</a></li>
+        </ul>
+        <p class="logout">© BLUEPEAK IT 2025</p>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Header -->
+        <header class="header">
+            <div class="line"></div>
+            <div class="user-info">
+                <img src="stratusLogo.png" alt="User Avatar" class="avatar">
+                <span>Ethan Kent-Ogiata</span>
+            </div>
+        </header>
+
+        <!-- Tests Run Section -->
+        <section class="tests-run">
+            <h2>Tests Run</h2>
+            <p>30 done this month</p>
+        </section>
+
+        <!-- Bot List Table -->
+        <table class="bot-list">
+            <thead>
+                <tr>
+                    <th>BOTS</th>
+                    <th>NO. OF TESTS RUN</th>
+                    <th>LATEST TEST RESULT</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Pirate Bot</td>
+                    <td>30</td>
+                    <td class="status-success">Success ✅</td>
+                </tr>
+                <tr>
+                    <td>Tim Bot</td>
+                    <td>10</td>
+                    <td class="status-fail">Fail ❌</td>
+                </tr>
+                <tr>
+                    <td>Phillip Bot</td>
+                    <td>12</td>
+                    <td class="status-success">Success ✅</td>
+                </tr>
+                <tr>
+                    <td>BluePeak IT AI</td>
+                    <td>22</td>
+                    <td class="status-success">Success ✅</td>
+                </tr>
+                <tr>
+                    <td>AI Assistant</td>
+                    <td>25</td>
+                    <td class="status-fail">Fail ❌</td>
+                </tr>
+                <tr>
+                    <td>Nate Bot</td>
+                    <td>5</td>
+                    <td class="status-fail">Fail ❌</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Pie Chart Section -->
+        <div class="pie-chart-container">
+            <div class="pie-chart">
+                <h3>94 Tests Done Overall</h3>
+                <canvas id="overallChart"></canvas>
+                <p><span style="color:green;">● Successes</span> 66% &nbsp; <span style="color:red;">● Failures</span> 34%</p>
+            </div>
+            <div class="pie-chart">
+                <h3>30 Tests Done This Week</h3>
+                <canvas id="weeklyChart"></canvas>
+                <p><span style="color:green;">● Successes</span> 54% &nbsp; <span style="color:red;">● Failures</span> 46%</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- JavaScript for Charts -->
+    <script>
+        // Chart Data
+        const overallData = {
+            labels: ['Successes', 'Failures'],
+            datasets: [{
+                data: [66, 34],
+                backgroundColor: ['green', 'red']
+            }]
+        };
+
+        const weeklyData = {
+            labels: ['Successes', 'Failures'],
+            datasets: [{
+                data: [54, 46],
+                backgroundColor: ['green', 'red']
+            }]
+        };
+
+        // Initialize Charts
+        const ctxOverall = document.getElementById('overallChart').getContext('2d');
+        const ctxWeekly = document.getElementById('weeklyChart').getContext('2d');
+
+        new Chart(ctxOverall, {
+            type: 'doughnut',
+            data: overallData
+        });
+
+        new Chart(ctxWeekly, {
+            type: 'doughnut',
+            data: weeklyData
+        });
+    </script>
+
+</body>
+</html>

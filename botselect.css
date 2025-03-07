@@ -1,107 +1,190 @@
-/* Global Styles */
+/* General Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Space-Grotesk", sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
 }
 
-/* Body Layout */
 body {
     display: flex;
-    background-color: #f4f4f4;
     height: 100vh;
+    background-color: #f8f9fa; /* Light background */
 }
 
 /* Sidebar */
 .sidebar {
     width: 250px;
-    background: #333;
-    padding: 20px;
     height: 100vh;
+    background: #e2e8f0; /* Light blue */
     display: flex;
     flex-direction: column;
-    color: white;
-    position: fixed;
-    left: 0;
-    top: 0;
+    align-items: center;
+    padding: 20px;
 }
 
-.sidebar h2 {
+.sidebar-logo {
+    width: 150px; /* Adjust size */
     margin-bottom: 20px;
 }
 
-.sidebar a {
-    text-decoration: none;
-    color: white;
-    padding: 10px 0;
-    display: block;
-    font-size: 16px;
-    transition: 0.3s;
-}
-
-.sidebar a:hover {
-    color: #007bff;
-}
-
-/* Main Content */
-.main-content {
-    flex-grow: 1;
-    margin-left: 270px; /* Space for sidebar */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
     width: 100%;
+    margin-top: 10px;
 }
 
-/* Container */
-.container {
+.sidebar-menu li {
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-menu a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    position: relative;
+}
+
+.sidebar-menu a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #007bff;
+    transition: width 0.3s ease, left 0.3s ease;
+}
+
+.sidebar-menu a:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+.logout {
+    margin-top: auto;
+    padding: 20px 0;
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.logout:hover {
+    color: black;
+}
+
+/* Sidebar Icon Styling */
+.sidebar-menu li i {
+    font-size: 18px;
+}
+
+/* Main Content Layout */
+.main-content {
+    flex: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ddd;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Test Run Section */
+.tests-run {
+    margin-top: 20px;
+}
+
+.tests-run h2 {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.tests-run p {
+    color: #6c757d;
+    font-size: 14px;
+}
+
+/* Bot List */
+.bot-list {
+    margin-top: 20px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.bot-list th, .bot-list td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.bot-list th {
+    font-weight: bold;
+    color: #6c757d;
+    border-bottom: 2px solid #ddd;
+}
+
+.bot-list td {
+    font-size: 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Light separator */
+}
+
+.bot-list td:last-child {
+    font-weight: 600;
+}
+
+/* Status Styling */
+.status-success {
+    color: green;
+    font-weight: bold;
+}
+
+.status-fail {
+    color: red;
+    font-weight: bold;
+}
+
+/* Pie Chart Container */
+.pie-chart-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    gap: 20px;
+}
+
+.pie-chart {
     background: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-width: 600px;
+    flex: 1;
     text-align: center;
 }
 
-/* Bot Grid */
-.bot-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 15px;
-    margin-top: 20px;
+.pie-chart h3 {
+    font-size: 18px;
+    font-weight: 600;
 }
 
-/* Bot Card */
-.bot-card {
-    background: #007bff;
-    color: white;
-    padding: 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.bot-card:hover {
-    background: #0056b3;
-}
-
-/* Responsive Design */
-@media screen and (max-width: 768px) {
-    .sidebar {
-        width: 200px;
-    }
-    .main-content {
-        margin-left: 220px;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .sidebar {
-        display: none; /* Hide sidebar on small screens */
-    }
-    .main-content {
-        margin-left: 0;
-    }
+.pie-chart canvas {
+    width: 100px !important;
+    height: 100px !important;
+    margin: auto;
 }

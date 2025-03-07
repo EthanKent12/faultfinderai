@@ -11,7 +11,7 @@
         });
 
         function fetchBots() {
-            fetch("https://67c7b741c19eb8753e7a78fd.mockapi.io/api/v1/bots")
+            fetch("")
             .then(response => response.json())
             .then(data => {
                 let botList = document.getElementById("bot-list");

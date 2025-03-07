@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($username === 'guest' && $password === 'guest123') {
         $_SESSION['username'] = 'guest';
         $_SESSION['role'] = 'guest';
-        header("Location: bot_select.php"); // Redirect to bot selection page
+        header("Location: botselect.html"); // Redirect to bot selection page
         exit();
     }
 
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $user['password'])) {
             $_SESSION['username'] = $user['username'];
             $_SESSION['role'] = $user['role']; // Store user role if needed
-            header("Location: bot_select.php"); // Redirect to bot selection page
+            header("Location: botselect.html"); // Redirect to bot selection page
             exit();
         } else {
             echo "Invalid password.";
