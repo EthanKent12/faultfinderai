@@ -13,18 +13,20 @@
     <aside class="sidebar">
         <img src="stratusLogo.png" alt="Stratus Logo" class="sidebar-logo">
         <ul class="sidebar-menu">
-            <li><a href="#"><i>🏠</i> DASHBOARD</a></li>
-            <li><a href="#"><i>🤖</i> BOTS ▾</a></li>
-            <ul class="sidebar-submenu">
-                <li><a href="#">Pirate Bot</a></li>
-                <li><a href="#">Tim Bot</a></li>
-                <li><a href="#">Phillip Bot</a></li>
-                <li><a href="#">BluePeak IT AI</a></li>
-                <li><a href="#">AI Assistant</a></li>
-                <li><a href="#">Nate Bot</a></li>
-            </ul>
-            <li><a href="#"><i>🚪</i> LOGOUT</a></li>
-        </ul>
+            <li><a href="#">🏠 Dashboard</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle">🤖 BOTS ▼</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Pirate Bot</a></li>
+                    <li><a href="#">Tim Bot</a></li>
+                    <li><a href="#">Phillip Bot</a></li>
+                    <li><a href="#">BluePeak IT AI</a></li>
+                    <li><a href="#">AI Assistant</a></li>
+                    <li><a href="#">Nate Bot</a></li>
+                </ul>
+            </li>
+            <li><a href="login.html">🚪 LOGOUT</a></li>
+        </ul>        
         <p class="logout">© BLUEPEAK IT 2025</p>
     </aside>
 
@@ -35,7 +37,7 @@
         <header class="header">
             <div class="line"></div>
             <div class="user-info">
-                <img src="stratusLogo.png" alt="User Avatar" class="avatar">
+                <img src="profilephoto.png" alt="User Avatar" class="avatar">
                 <span>Ethan Kent-Ogiata</span>
             </div>
         </header>
@@ -94,12 +96,12 @@
             <div class="pie-chart">
                 <h3>94 Tests Done Overall</h3>
                 <canvas id="overallChart"></canvas>
-                <p><span style="color:green;">● Successes</span> 66% &nbsp; <span style="color:red;">● Failures</span> 34%</p>
+                <p><span style="color:green;">● Success</span> 66% &nbsp; <span style="color:red;">● Failure</span> 34%</p>
             </div>
             <div class="pie-chart">
                 <h3>30 Tests Done This Week</h3>
                 <canvas id="weeklyChart"></canvas>
-                <p><span style="color:green;">● Successes</span> 54% &nbsp; <span style="color:red;">● Failures</span> 46%</p>
+                <p><span style="color:green;">● Success</span> 54% &nbsp; <span style="color:red;">● Failure</span> 46%</p>
             </div>
         </div>
 
@@ -109,7 +111,7 @@
     <script>
         // Chart Data
         const overallData = {
-            labels: ['Successes', 'Failures'],
+            labels: ['Success', 'Failure'],
             datasets: [{
                 data: [66, 34],
                 backgroundColor: ['green', 'red']
@@ -117,7 +119,7 @@
         };
 
         const weeklyData = {
-            labels: ['Successes', 'Failures'],
+            labels: ['Success', 'Failure'],
             datasets: [{
                 data: [54, 46],
                 backgroundColor: ['green', 'red']
@@ -137,6 +139,18 @@
             type: 'doughnut',
             data: weeklyData
         });
+
+        //dropdown menu
+        document.addEventListener("DOMContentLoaded", function () {
+    const dropdownToggle = document.querySelector(".dropdown-toggle");
+    const dropdown = dropdownToggle.parentElement;
+
+    dropdownToggle.addEventListener("click", function (event) {
+        event.preventDefault();
+        dropdown.classList.toggle("active");
+    });
+});
+
     </script>
 
 </body>

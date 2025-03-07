@@ -32,7 +32,6 @@ body {
     list-style: none;
     padding: 0;
     width: 100%;
-    margin-top: 10px;
 }
 
 .sidebar-menu li {
@@ -130,6 +129,13 @@ body {
     border-collapse: collapse;
 }
 
+.avatar {
+    width: 35px;  /* Adjust width */
+    height: 35px; /* Adjust height */
+    border-radius: 50%; /* Ensures it's a circle */
+    object-fit: cover; /* Prevents distortion */
+}
+
 .bot-list th, .bot-list td {
     padding: 12px 15px;
     text-align: left;
@@ -184,7 +190,45 @@ body {
 }
 
 .pie-chart canvas {
-    width: 100px !important;
-    height: 100px !important;
+    width: 300px !important;
+    height: 300px !important;
     margin: auto;
+}
+
+/* Dropdown container */
+.dropdown {
+    width: 100%;
+}
+
+/* Initially hidden dropdown menu */
+.dropdown-menu {
+    display: none;
+    list-style: none;
+    padding: 0;
+    background: #d0d7e1;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+/* Show dropdown when parent is active */
+.dropdown.active .dropdown-menu {
+    display: block;
+}
+
+/* Dropdown items */
+.dropdown-menu li {
+    padding: 10px;
+    text-align: center;
+}
+
+.dropdown-menu li a {
+    text-decoration: none;
+    color: black;
+    display: block;
+    padding: 10px;
+    transition: 0.3s;
+}
+
+.dropdown-menu li a:hover {
+    background: #c1c8d2;
 }
