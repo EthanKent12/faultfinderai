@@ -232,3 +232,14 @@ body {
 .dropdown-menu li a:hover {
     background: #c1c8d2;
 }
+
+/* Bot Links */
+.bot-list td a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.bot-list td a:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Details</title>
+    <link rel="stylesheet" href="botdetailscss.css"> <!-- Link to your styles -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script> <!-- Icons -->
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <img src="stratusLogo.png" alt="Stratus Logo" class="sidebar-logo">
+        <ul class="sidebar-menu">
+            <li><a href="botselect.html">🏠 Dashboard</a></li>
+            <li class="menu-dropdown">
+                <a href="#">🤖 BOTS ▼</a>
+                <ul class="submenu">
+                    <li><a href="#">Pirate Bot</a></li>
+                    <li><a href="#">Tim Bot</a></li>
+                    <li><a href="#">Phillip Bot</a></li>
+                    <li><a href="#">BluePeak IT AI</a></li>
+                    <li><a href="#">AI Assistant</a></li>
+                    <li><a href="#">Nate Bot</a></li>
+                </ul>
+            </li>
+            <li><a href="login.html">🚪 Logout</a></li>
+        </ul>
+        <p class="copyright">© BLUEPEAK IT 2025</p>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        
+        <!-- Header -->
+        <header class="header">
+            <div class="line"></div>
+            <div class="user-info">
+                <img src="profilephoto.png" alt="User Avatar" class="avatar">
+                <span>Ethan Kent-Ogiata</span>
+            </div>
+        </header>
+
+        <!-- Test Details Section -->
+        <section class="test-section">
+            <h2>[Selected Bot]</h2>
+            <p>30 Tests Overall</p>
+
+            <!-- Table -->
+            <table class="test-table">
+                <thead>
+                    <tr>
+                        <th>TEST ID</th>
+                        <th>DATE OF TEST</th>
+                        <th>TEST RESULT</th>
+                        <th>ERROR CODE</th>
+                    </tr>
+                </thead>
+                <tbody id="test-log-body">
+                    <!-- Test data will be injected here -->
+                </tbody>
+            </table>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <span class="prev">« PREV</span>
+                <span class="page-num">1 of 3</span>
+                <span class="next">NEXT »</span>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Fake Test Data
+        const testData = [
+            { id: "A5E1", date: "01-10-2025", status: "Success", error: "-" },
+            { id: "EB32", date: "12-28-2024", status: "Fail", error: "E4309" },
+            { id: "FF09", date: "12-20-2024", status: "Success", error: "-" },
+            { id: "FR53", date: "11-28-2024", status: "Success", error: "-" },
+            { id: "EI90", date: "11-21-2024", status: "Fail", error: "E1204" },
+            { id: "EW21", date: "10-31-2024", status: "Fail", error: "E6854" },
+            { id: "FF09", date: "10-20-2024", status: "Success", error: "-" },
+            { id: "FF09", date: "10-11-2024", status: "Success", error: "-" },
+            { id: "FF09", date: "09-30-2024", status: "Success", error: "-" }
+        ];
+
+        // Inject Data into Table
+        const logTable = document.getElementById("test-log-body");
+
+        testData.forEach(test => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${test.id}</td>
+                <td>${test.date}</td>
+                <td class="${test.status === 'Success' ? 'status-success' : 'status-fail'}">
+                    ${test.status} ${test.status === 'Success' ? '✅' : '❌'}
+                </td>
+                <td>${test.error}</td>
+            `;
+            logTable.appendChild(row);
+        });
+    </script>
+
+</body>
+</html>

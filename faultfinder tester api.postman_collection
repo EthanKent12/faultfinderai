@@ -1,0 +1,44 @@
+{
+	"info": {
+		"_postman_id": "e1f67235-d2d7-4578-9cf4-9746bed55db3",
+		"name": "faultfinder tester api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42929991",
+		"_collection_link": "https://bluepeak-it.postman.co/workspace/bluepeak-it~fded6050-bc02-4b56-83a8-37576a30cc13/collection/42929991-e1f67235-d2d7-4578-9cf4-9746bed55db3?action=share&source=collection_link&creator=42929991"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"bot_id\": \"bot_123\",\r\n  \"bot_name\": \"AI Chatbot Alpha\",\r\n  \"avatar\": \"https://example.com/avatars/ai_chatbot_alpha.png\",\r\n  \"tests\": [\r\n    {\r\n      \"test_id\": \"test_001\",\r\n      \"timestamp\": \"2025-03-14T14:00:00Z\",\r\n      \"status\": \"success\",\r\n      \"process_time\": \"2.5s\",\r\n      \"interaction_type\": \"text_query\",\r\n      \"raw_data\": {\r\n        \"input\": \"Hello, how are you?\",\r\n        \"expected_output\": \"I'm doing well, thank you!\",\r\n        \"actual_output\": \"I'm doing well, thank you!\",\r\n        \"error_message\": null\r\n      }\r\n    },\r\n    {\r\n      \"test_id\": \"test_002\",\r\n      \"timestamp\": \"2025-03-14T14:05:00Z\",\r\n      \"status\": \"failure\",\r\n      \"process_time\": \"3.1s\",\r\n      \"interaction_type\": \"voice_query\",\r\n      \"raw_data\": {\r\n        \"input\": \"What's the weather today?\",\r\n        \"expected_output\": \"It's sunny with a high of 25°C.\",\r\n        \"actual_output\": \"I don't understand.\",\r\n        \"error_message\": \"Speech recognition failed\"\r\n      }\r\n    },\r\n    {\r\n      \"test_id\": \"test_003\",\r\n      \"timestamp\": \"2025-03-14T14:10:00Z\",\r\n      \"status\": \"success\",\r\n      \"process_time\": \"1.8s\",\r\n      \"interaction_type\": \"image_processing\",\r\n      \"raw_data\": {\r\n        \"input\": \"Image of a cat\",\r\n        \"expected_output\": \"Detected: Cat\",\r\n        \"actual_output\": \"Detected: Cat\",\r\n        \"error_message\": null\r\n      }\r\n    }\r\n  ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://mockapi.example.com/bot/test-details",
+					"protocol": "https",
+					"host": [
+						"mockapi",
+						"example",
+						"com"
+					],
+					"path": [
+						"bot",
+						"test-details"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

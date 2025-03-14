@@ -17,12 +17,12 @@
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle">🤖 BOTS ▼</a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Pirate Bot</a></li>
-                    <li><a href="#">Tim Bot</a></li>
-                    <li><a href="#">Phillip Bot</a></li>
-                    <li><a href="#">BluePeak IT AI</a></li>
-                    <li><a href="#">AI Assistant</a></li>
-                    <li><a href="#">Nate Bot</a></li>
+                    <li><a href="botdetails.html?bot=Pirate Bot">Pirate Bot</a></li>
+                    <li><a href="botdetails.html?bot=Tim Bot">Tim Bot</a></li>
+                    <li><a href="botdetails.html?bot=Phillip Bot">Phillip Bot</a></li>
+                    <li><a href="botdetails.html?bot=BluePeak IT AI">BluePeak IT AI</a></li>
+                    <li><a href="botdetails.html?bot=AI Assistant">AI Assistant</a></li>
+                    <li><a href="botdetails.html?bot=Nate Bot">Nate Bot</a></li>
                 </ul>
             </li>
             <li><a href="login.html">🚪 LOGOUT</a></li>
@@ -58,32 +58,32 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr onclick="goToTestDetails('Pirate Bot')">
                     <td>Pirate Bot</td>
                     <td>30</td>
                     <td class="status-success">Success ✅</td>
                 </tr>
-                <tr>
+                <tr onclick="goToTestDetails('Tim Bot')">
                     <td>Tim Bot</td>
                     <td>10</td>
                     <td class="status-fail">Fail ❌</td>
                 </tr>
-                <tr>
+                <tr onclick="goToTestDetails('Phillip Bot')">
                     <td>Phillip Bot</td>
                     <td>12</td>
                     <td class="status-success">Success ✅</td>
                 </tr>
-                <tr>
+                <tr onclick="goToTestDetails('BluePeak IT AI')">
                     <td>BluePeak IT AI</td>
                     <td>22</td>
                     <td class="status-success">Success ✅</td>
                 </tr>
-                <tr>
+                <tr onclick="goToTestDetails('AI Assistant')">
                     <td>AI Assistant</td>
                     <td>25</td>
                     <td class="status-fail">Fail ❌</td>
                 </tr>
-                <tr>
+                <tr onclick="goToTestDetails('Nate Bot')">
                     <td>Nate Bot</td>
                     <td>5</td>
                     <td class="status-fail">Fail ❌</td>
@@ -107,7 +107,7 @@
 
     </main>
 
-    <!-- JavaScript for Charts -->
+    <!-- JavaScript -->
     <script>
         // Chart Data
         const overallData = {
@@ -127,30 +127,39 @@
         };
 
         // Initialize Charts
-        const ctxOverall = document.getElementById('overallChart').getContext('2d');
-        const ctxWeekly = document.getElementById('weeklyChart').getContext('2d');
-
-        new Chart(ctxOverall, {
+        new Chart(document.getElementById('overallChart').getContext('2d'), {
             type: 'doughnut',
             data: overallData
         });
 
-        new Chart(ctxWeekly, {
+        new Chart(document.getElementById('weeklyChart').getContext('2d'), {
             type: 'doughnut',
             data: weeklyData
         });
 
-        //dropdown menu
+        // Dropdown menu functionality
         document.addEventListener("DOMContentLoaded", function () {
-    const dropdownToggle = document.querySelector(".dropdown-toggle");
-    const dropdown = dropdownToggle.parentElement;
+            const dropdownToggle = document.querySelector(".dropdown-toggle");
+            const dropdown = dropdownToggle.parentElement;
+            const dropdownMenu = dropdown.querySelector(".dropdown-menu");
 
-    dropdownToggle.addEventListener("click", function (event) {
-        event.preventDefault();
-        dropdown.classList.toggle("active");
-    });
-});
+            dropdownToggle.addEventListener("click", function (event) {
+                event.preventDefault();
+                dropdown.classList.toggle("active");
+            });
 
+            // Close dropdown if clicked outside
+            document.addEventListener("click", function (event) {
+                if (!dropdown.contains(event.target)) {
+                    dropdown.classList.remove("active");
+                }
+            });
+        });
+
+        // Redirect to test details page when a bot is clicked
+        function goToTestDetails(botName) {
+            window.location.href = `botdetails.html?bot=${encodeURIComponent(botName)}`;
+        }
     </script>
 
 </body>
