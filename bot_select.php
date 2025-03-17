@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<!-- THIS IS CURRENTLY NOT IN USE, WAITING FOR API FROM STRATUS -->
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
