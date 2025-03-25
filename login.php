@@ -1,60 +1,34 @@
 <?php
-session_start(); // Start the session
+require 'db.php';  // Include the database connection
 
-require 'db.php'; // Ensure this file is correctly set up
+header('Content-Type: application/json');
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $conn->real_escape_string($_POST['username']);
+    $password = $conn->real_escape_string($_POST['password']);
 
-    // Admin login bypass (for testing)
-    if ($username === 'admin' && $password === 'admin123') {
-        $_SESSION['username'] = 'admin';
-        $_SESSION['role'] = 'admin';
-        $_SESSION['AccessID'] = 1; // Set AccessID for admin
-        header("Location: admin.php"); // Redirect to admin page
-        exit();
-    }
-
-    // Guest login bypass (for testing)
-    if ($username === 'guest' && $password === 'guest123') {
-        $_SESSION['username'] = 'guest';
-        $_SESSION['role'] = 'guest';
-        header("Location: botselect.html"); // Redirect to bot selection page
-        exit();
-    }
-
-    // Check if the username exists in the database
-    $query = "SELECT * FROM credential WHERE Username = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $query = "SELECT CredentialID, Username, PasswordHash, Role FROM credential WHERE Username = '$username'";
+    $result = $conn->query($query);    
 
     if ($result->num_rows == 1) {
-        // User exists, verify the password
         $user = $result->fetch_assoc();
+        
+        // Assuming password hashing is used
         if (password_verify($password, $user['PasswordHash'])) {
-            // Set session variables
+            session_start();
+            $_SESSION['user_id'] = $user['CredentialID'];
             $_SESSION['username'] = $user['Username'];
-            $_SESSION['role'] = $user['AccessID']; // Store AccessID in session
-            $_SESSION['AccessID'] = $user['AccessID']; // Ensure correct AccessID
-
-            // Redirect based on role
-            if ($user['AccessID'] == 1) { // Admin role
-                header("Location: admin.php"); // Admin page
-            } else {
-                header("Location: botselect.html"); // Regular user redirect
-            }
-            exit();
+            $_SESSION['role'] = $user['Role']; // Store user role
+        
+            // Send the role in the response
+            echo json_encode(["status" => "success", "message" => "Login successful", "role" => $user['Role']]);
         } else {
-            echo "Invalid password.";
-        }
+            echo json_encode(["status" => "error", "message" => "Invalid password"]);
+        }        
     } else {
-        echo "User does not exist.";
+        echo json_encode(["status" => "error", "message" => "User not found"]);
     }
-
-    $stmt->close();
-    $conn->close();
 }
+
+$conn->close();
 ?>

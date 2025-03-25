@@ -17,15 +17,15 @@
             <li class="menu-dropdown">
                 <a href="#">🤖 BOTS ▼</a>
                 <ul class="submenu">
-                    <li><a href="#">Pirate Bot</a></li>
-                    <li><a href="#">Tim Bot</a></li>
-                    <li><a href="#">Phillip Bot</a></li>
-                    <li><a href="#">BluePeak IT AI</a></li>
-                    <li><a href="#">AI Assistant</a></li>
-                    <li><a href="#">Nate Bot</a></li>
+                    <li><a href="botdetails.html?bot=Pirate Bot">Pirate Bot</a></li>
+                    <li><a href="botdetails.html?bot=Tim Bot">Tim Bot</a></li>
+                    <li><a href="botdetails.html?bot=Phillip Bot">Phillip Bot</a></li>
+                    <li><a href="botdetails.html?bot=BluePeak IT AI">BluePeak IT AI</a></li>
+                    <li><a href="botdetails.html?bot=AI Assistant">AI Assistant</a></li>
+                    <li><a href="botdetails.html?bot=Nate Bot">Nate Bot</a></li>
                 </ul>
             </li>
-            <li><a href="login.html">🚪 Logout</a></li>
+            <li><a href="index.html">🚪 Logout</a></li>
         </ul>
         <p class="copyright">© BLUEPEAK IT 2025</p>
     </aside>
@@ -72,35 +72,60 @@
     </main>
 
     <script>
-        // Fake Test Data
-        const testData = [
-            { id: "A5E1", date: "01-10-2025", status: "Success", error: "-" },
-            { id: "EB32", date: "12-28-2024", status: "Fail", error: "E4309" },
-            { id: "FF09", date: "12-20-2024", status: "Success", error: "-" },
-            { id: "FR53", date: "11-28-2024", status: "Success", error: "-" },
-            { id: "EI90", date: "11-21-2024", status: "Fail", error: "E1204" },
-            { id: "EW21", date: "10-31-2024", status: "Fail", error: "E6854" },
-            { id: "FF09", date: "10-20-2024", status: "Success", error: "-" },
-            { id: "FF09", date: "10-11-2024", status: "Success", error: "-" },
-            { id: "FF09", date: "09-30-2024", status: "Success", error: "-" }
-        ];
-
-        // Inject Data into Table
-        const logTable = document.getElementById("test-log-body");
-
-        testData.forEach(test => {
-            const row = document.createElement("tr");
-            row.innerHTML = `
-                <td>${test.id}</td>
-                <td>${test.date}</td>
-                <td class="${test.status === 'Success' ? 'status-success' : 'status-fail'}">
-                    ${test.status} ${test.status === 'Success' ? '✅' : '❌'}
-                </td>
-                <td>${test.error}</td>
-            `;
-            logTable.appendChild(row);
-        });
+        async function fetchBotDetails() {
+            // Get bot name from URL query string (e.g., ?bot=Pirate%20Bot)
+            const urlParams = new URLSearchParams(window.location.search);
+            const botName = urlParams.get("bot");
+    
+            if (!botName) {
+                console.error("No bot specified");
+                document.querySelector(".test-section h2").textContent = "No Bot Selected";
+                return;
+            }
+    
+            // Decode bot name in case of special characters or spaces
+            const decodedBotName = decodeURIComponent(botName);
+    
+            try {
+                const response = await fetch("botdetails.json"); // Ensure botdetails.json is in the same folder
+                if (!response.ok) throw new Error("Failed to fetch bot details");
+    
+                const botData = await response.json();
+                const bot = botData[decodedBotName];
+    
+                if (!bot) {
+                    console.error("Bot not found:", decodedBotName);
+                    document.querySelector(".test-section h2").textContent = "Bot Not Found";
+                    return;
+                }
+    
+                // Update Bot Name in Heading
+                document.querySelector(".test-section h2").textContent = bot.name;
+                document.querySelector(".test-section p").textContent = `${bot.tests_overall} Tests Overall`;
+    
+                // Inject test log data into table
+                const logTable = document.getElementById("test-log-body");
+                logTable.innerHTML = ""; // Clear previous content
+    
+                bot.test_logs.forEach(test => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${test.id}</td>
+                        <td>${test.date}</td>
+                        <td class="${test.status === 'Success' ? 'status-success' : 'status-fail'}">
+                            ${test.status} ${test.status === 'Success' ? '✅' : '❌'}
+                        </td>
+                        <td>${test.error}</td>
+                    `;
+                    logTable.appendChild(row);
+                });
+    
+            } catch (error) {
+                console.error("Error loading bot details:", error);
+            }
+        }
+    
+        document.addEventListener("DOMContentLoaded", fetchBotDetails);
     </script>
-
 </body>
 </html>

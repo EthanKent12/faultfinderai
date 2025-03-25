@@ -30,5 +30,31 @@
                 <button type="submit" class="sign-in-button">Sign In</button>
             </form>
         </div>
+
+        <script>
+            document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    let formData = new FormData(this); // Get form data
+
+    fetch('login.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === "success") {
+            if (data.role === "admin") {
+                window.location.href = "admin.php"; // Redirect to Admin Dashboard
+            } else {
+                window.location.href = "botselect.html"; // Redirect to Normal User Dashboard
+            }
+        } else {
+            alert(data.message); // Show error message
+        }
+    })
+    .catch(error => console.error('Error:', error));
+});
+        </script>
     </body>
 </html>

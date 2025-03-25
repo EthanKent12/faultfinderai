@@ -25,7 +25,7 @@
                     <li><a href="botdetails.html?bot=Nate Bot">Nate Bot</a></li>
                 </ul>
             </li>
-            <li><a href="login.html">🚪 LOGOUT</a></li>
+            <li><a href="index.html">🚪 LOGOUT</a></li>
         </ul>        
         <p class="logout">© BLUEPEAK IT 2025</p>
     </aside>
@@ -49,7 +49,7 @@
         </section>
 
         <!-- Bot List Table -->
-        <table class="bot-list">
+        <table class="bot-list" id="bot-list">
             <thead>
                 <tr>
                     <th>BOTS</th>
@@ -58,36 +58,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr onclick="goToTestDetails('Pirate Bot')">
-                    <td>Pirate Bot</td>
-                    <td>30</td>
-                    <td class="status-success">Success ✅</td>
-                </tr>
-                <tr onclick="goToTestDetails('Tim Bot')">
-                    <td>Tim Bot</td>
-                    <td>10</td>
-                    <td class="status-fail">Fail ❌</td>
-                </tr>
-                <tr onclick="goToTestDetails('Phillip Bot')">
-                    <td>Phillip Bot</td>
-                    <td>12</td>
-                    <td class="status-success">Success ✅</td>
-                </tr>
-                <tr onclick="goToTestDetails('BluePeak IT AI')">
-                    <td>BluePeak IT AI</td>
-                    <td>22</td>
-                    <td class="status-success">Success ✅</td>
-                </tr>
-                <tr onclick="goToTestDetails('AI Assistant')">
-                    <td>AI Assistant</td>
-                    <td>25</td>
-                    <td class="status-fail">Fail ❌</td>
-                </tr>
-                <tr onclick="goToTestDetails('Nate Bot')">
-                    <td>Nate Bot</td>
-                    <td>5</td>
-                    <td class="status-fail">Fail ❌</td>
-                </tr>
+               <!-- Bots will be loaded here dynamically -->
             </tbody>
         </table>
 
@@ -109,6 +80,42 @@
 
     <!-- JavaScript -->
     <script>
+
+async function fetchBots() {
+    const API_URL = "bots.json"; 
+
+    try {
+        const response = await fetch(API_URL);
+        if (!response.ok) throw new Error("Failed to fetch bots.json");
+        
+        const bots = await response.json();
+        console.log("Bots data loaded:", bots); // Debugging
+
+        const botListTable = document.getElementById("bot-list");
+        botListTable.innerHTML = "";
+
+        bots.forEach(bot => {
+            const row = document.createElement("tr");
+            row.onclick = () => goToTestDetails(bot.name);
+
+            row.innerHTML = `
+                <td>${bot.name}</td>
+                <td>${bot.tests_run}</td>
+                <td class="${bot.latest_result === 'Success' ? 'status-success' : 'status-fail'}">
+                    ${bot.latest_result === 'Success' ? 'Success ✅' : 'Fail ❌'}
+                </td>
+            `;
+
+            botListTable.appendChild(row);
+        });
+
+    } catch (error) {
+        console.error("Error fetching bots:", error);
+    }
+}
+
+// Fetch bots when the page loads
+document.addEventListener("DOMContentLoaded", fetchBots);
         // Chart Data
         const overallData = {
             labels: ['Success', 'Failure'],

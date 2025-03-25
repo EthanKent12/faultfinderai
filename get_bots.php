@@ -1,18 +1,24 @@
 <?php
-// this is a mock api created for the sake of testing the faultfinder project
+require 'db.php'; // Ensure database connection
 
 header("Content-Type: application/json");
 
-// mock bot data
-$bots = [
-    ["id" => 1, "name" => "Pirate Bot"],
-    ["id" => 2, "name" => "Tim Bot"],
-    ["id" => 3, "name" => "Phillip Bot"],
-    ["id" => 4, "name" => "BluePeak IT AI"],
-    ["id" => 5, "name" => "AI Assistant"],
-    ["id" => 6, "name" => "Nate Bot"]
-];
+$query = "SELECT * FROM product"; // Assuming you have a `bots` table
+$result = $conn->query($query);
 
-// return JSON response
+$bots = [];
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $bots[] = [
+            "id" => $row['id'],
+            "name" => $row['name'],
+            "description" => $row['description'],
+            "status" => $row['status']
+        ];
+    }
+}
+
 echo json_encode($bots);
+$conn->close();
 ?>

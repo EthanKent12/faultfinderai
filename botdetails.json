@@ -1,0 +1,30 @@
+{
+    "Pirate Bot": {
+        "name": "Pirate Bot",
+        "tests_overall": 30,
+        "test_logs": [
+            { "id": "A5E1", "date": "01-10-2025", "status": "Success", "error": "-" },
+            { "id": "EB32", "date": "12-28-2024", "status": "Fail", "error": "E4309" },
+            { "id": "FF09", "date": "12-20-2024", "status": "Success", "error": "-" },
+            { "id": "FR53", "date": "11-28-2024", "status": "Success", "error": "-" },
+            { "id": "EW21", "date": "10-31-2024", "status": "Fail", "error": "E6854" },
+            { "id": "FF09", "date": "10-20-2024", "status": "Success", "error": "-" },
+            { "id": "FF09", "date": "10-11-2024", "status": "Success", "error": "-" },
+            { "id": "FF09", "date": "09-30-2024", "status": "Success", "error": "-" }
+        ]
+    },
+    "Tim Bot": {
+        "name": "Tim Bot",
+        "tests_overall": 15,
+        "test_logs": [
+            { "id": "TB01", "date": "02-15-2025", "status": "Fail", "error": "E1020" },
+            { "id": "TB02", "date": "02-10-2025", "status": "Success", "error": "-" },
+            { "id": "TB03", "date": "02-05-2025", "status": "Success", "error": "-" },
+            { "id": "EW21", "date": "10-31-2024", "status": "Fail", "error": "E6854" },
+            { "id": "FF09", "date": "10-20-2024", "status": "Success", "error": "-" },
+            { "id": "FF09", "date": "10-11-2024", "status": "Success", "error": "-" },
+            { "id": "FF09", "date": "09-30-2024", "status": "Success", "error": "-" },
+            { "id": "EI90", "date": "11-21-2024", "status": "Fail", "error": "E1204" }
+        ]
+    }
+}
